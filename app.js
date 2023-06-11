@@ -3,7 +3,9 @@ import bodyParser from "body-parser"
 import { getUser, getUsers } from "./teste1.js"
 import { postUser } from "./teste2.js"
 import { deleteUser } from "./teste3.js"
+import { putUser } from "./teste4.js"
 import path from 'path';
+
 const __dirname = path.resolve();
 
 const app = express()
@@ -31,7 +33,7 @@ app.get("/user", getUser)
 app.get("/users", getUsers)
 app.post("/users", postUser)
 app.delete("/users", deleteUser)
-// app.put("/users", teste4)
+app.put("/users", putUser)
 // app.get("/users/access", teste5)
 
 const port = 3000
