@@ -1,4 +1,3 @@
-
 const fakeData  =  [
     {
         id: 1,
@@ -7,5 +6,4 @@ const fakeData  =  [
     }
 ]
 
-
-module.exports = fakeData;
+export default fakeData
