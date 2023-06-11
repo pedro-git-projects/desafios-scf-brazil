@@ -1,7 +1,7 @@
 // É melhor utilizar const do que var
 // para evitar que o objeto seja acidentalmente
 // sobrescrito
-import fakeData from "./fakeData.js" 
+import fakeData from "./fakeData.js"
 
 export const getUser = (req, res, next) => {
   const { name } = req.query //  podemos extrair a propriedade via destructuring
@@ -22,4 +22,3 @@ export const getUser = (req, res, next) => {
 export const getUsers = (req, res, next) => {
   res.send(fakeData)
 }
-
