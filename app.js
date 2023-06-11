@@ -4,6 +4,7 @@ import { getUser, getUsers } from "./teste1.js"
 import { postUser } from "./teste2.js"
 import { deleteUser } from "./teste3.js"
 import { putUser } from "./teste4.js"
+import { getAccess } from "./teste5.js"
 import path from 'path';
 
 const __dirname = path.resolve();
@@ -34,7 +35,7 @@ app.get("/users", getUsers)
 app.post("/users", postUser)
 app.delete("/users", deleteUser)
 app.put("/users", putUser)
-// app.get("/users/access", teste5)
+app.get("/users/access", getAccess)
 
 const port = 3000
 app.listen(port, function () {
