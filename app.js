@@ -5,9 +5,10 @@ import { postUser } from "./teste2.js"
 import { deleteUser } from "./teste3.js"
 import { putUser } from "./teste4.js"
 import { getAccess } from "./teste5.js"
-import path from 'path';
+import checkPermissions from "./permissions.js"
+import path from "path"
 
-const __dirname = path.resolve();
+const __dirname = path.resolve()
 
 const app = express()
 
@@ -33,8 +34,8 @@ app.get("/", function (req, res) {
 app.get("/user", getUser)
 app.get("/users", getUsers)
 app.post("/users", postUser)
-app.delete("/users", deleteUser)
-app.put("/users", putUser)
+app.delete("/users", [checkPermissions, deleteUser])
+app.put("/users", [checkPermissions, putUser])
 app.get("/users/access", getAccess)
 
 const port = 3000

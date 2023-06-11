@@ -4,7 +4,7 @@ import fakeData from "./fakeData.js"
 // que é o array fakeData.
 export const postUser = (req, res) => {
   try {
-    const { name, job } = req.body
+    const { name, job, permissions } = req.body
 
     // Verifica se nome ou job estão faltando.
     if (!name || !job) {
@@ -16,6 +16,7 @@ export const postUser = (req, res) => {
     const newUser = {
       name,
       job,
+      permissions: permissions || [], // permissões vazias se não forem sobrescritas
     }
 
     // Adiciona o novo usuário ao array fakeData.
