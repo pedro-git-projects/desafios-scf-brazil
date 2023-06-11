@@ -2,6 +2,7 @@ import express from "express"
 import bodyParser from "body-parser"
 import { getUser, getUsers } from "./teste1.js"
 import { postUser } from "./teste2.js"
+import { deleteUser } from "./teste3.js"
 import path from 'path';
 const __dirname = path.resolve();
 
@@ -29,7 +30,7 @@ app.get("/", function (req, res) {
 app.get("/user", getUser)
 app.get("/users", getUsers)
 app.post("/users", postUser)
-// app.delete("/users", teste3)
+app.delete("/users", deleteUser)
 // app.put("/users", teste4)
 // app.get("/users/access", teste5)
 

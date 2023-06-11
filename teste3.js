@@ -1,15 +1,16 @@
-var data =  require("./fakeData");
+import fakeData from "./fakeData.js"
 
-module.exports = function(req, res) {
-  
-    var name =  req.query.name;
+export const deleteUser = (req, res) => {
+  const { name } = req.query
 
-    for(let i = 0; i < data.length;  i++) {
-        if(i.name == name) {
-            data[i] = null;
-        }
-    }
+  const index = fakeData.findIndex((user) => user.name === name)
 
-    res.send("success");
-
-};
+  // Verifica se o usuário foi encontrado.
+  if (index !== -1) {
+    // Remove o usuário na posição index.
+    fakeData.splice(index, 1)
+    res.json({ message: "Usuário removido com sucesso" })
+  } else {
+    res.status(404).json({ message: "Usuário não encontrado" })
+  }
+}
