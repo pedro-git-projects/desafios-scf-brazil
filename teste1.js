@@ -1,24 +1,31 @@
-var data =  require("./fakeData");
+// É melhor utilizar const do que var
+// para evitar que o objeto seja acidentalmente sobrescrito.
+import fakeData from "./fakeData.js"
 
-const getUser = ( req, res, next ) => {
-    
-    var name =  req.query.name;
+export const accessCount = {} // Exportando para o desafio 5.
 
-    for(let i = 0; i < data.length;  i++) {
-        if(i.name == name) {
-            res.send(data[i]);
-        }
+export const getUser = (req, res, next) => {
+  const { name } = req.query //  podemos extrair a propriedade via destructuring.
+
+  //  Utilizar find evita que acessemos acidentalmente um índice fora
+  //  dos limites e torna o código mais legível.
+  //  Utilizar comparação estrtita também dá mais segurança de tipo.
+  const user = fakeData.find((user) => user.name === name)
+
+  if (user) {
+    // Incrementa os acessos para o desafio 5.
+    if (accessCount[name]) {
+      accessCount[name]++
+    } else {
+      accessCount[name] = 1
     }
+    res.send(user)
+  } else {
+    // Trata o caso em que o usuário não foi encontrado.
+    res.status(404).json({ message: "Usuário não encontrado" })
+  }
+}
 
-};
-
-const getUsers = ( req, res, next ) => {
-    
-    res.send(data);
-    
-};
-
-module.exports = {
-    getUser,
-    getUsers
-};
+export const getUsers = (req, res, next) => {
+  res.send(fakeData)
+}

@@ -1,42 +1,44 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+import express from "express"
+import bodyParser from "body-parser"
+import { getUser, getUsers } from "./teste1.js"
+import { postUser } from "./teste2.js"
+import { deleteUser } from "./teste3.js"
+import { putUser } from "./teste4.js"
+import { getAccess } from "./teste5.js"
+import checkPermissions from "./permissions.js"
+import path from "path"
 
-var teste1 = require("./teste1");
-var teste2 = require("./teste2");
-var teste3 = require("./teste3");
-var teste4 = require("./teste4");
-var teste5 = require("./teste5");
+const __dirname = path.resolve()
 
+const app = express()
 
-app.set('view engine', 'jade');
+app.set("view engine", "jade")
 
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-app.use(bodyParser.json());                        
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/public"))
 
-app.get('/', function(req, res){
+app.get("/", function (req, res) {
   res.send(`get user/ </br>
   get users/ </br>
   post users/ </br>
   delete users/ </br>
   put users/ </br>
-  `);
-});
+  `)
+})
 
-app.get("/user", teste1.getUser);
-app.get("/users", teste1.getUsers);
-app.post("/users", teste2)
-app.delete("/users", teste3)
-app.put("/users", teste4)
-app.get("/users/access", teste5);
+app.get("/user", getUser)
+app.get("/users", getUsers)
+app.post("/users", postUser)
+app.delete("/users", [checkPermissions, deleteUser])
+app.put("/users", [checkPermissions, putUser])
+app.get("/users/access", getAccess)
 
-
-const port  = 3000;
-app.listen(port, function(){
-  console.log('Express server listening on port ' + port);
-});
+const port = 3000
+app.listen(port, function () {
+  console.log("Express server listening on port " + port)
+})

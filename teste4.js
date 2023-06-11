@@ -1,13 +1,14 @@
-var data =  require("./fakeData");
+import fakeData from "./fakeData.js"
 
-module.exports =  function(req, res) {
-  
-    var id =  req.query.id;
+export const putUser = (req, res) => {
+  const userId = req.query.id
+  const updatedUser = fakeData.find((user) => user.id === userId)
 
-    const reg = data.find(d => id == id);
-    reg.name = req.body.name;
-    reg.job = req.body.job;
-
-    res.send(reg);
-
-};
+  if (updatedUser) {
+    updatedUser.name = req.body.name
+    updatedUser.job = req.body.job
+    res.json(updatedUser)
+  } else {
+    res.status(404).json({ message: "Usuário não encontrado" })
+  }
+}
