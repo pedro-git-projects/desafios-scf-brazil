@@ -1,3 +1,4 @@
+import path from "path"
 import express from "express"
 import bodyParser from "body-parser"
 import { getUser, getUsers } from "./teste1.js"
@@ -6,7 +7,6 @@ import { deleteUser } from "./teste3.js"
 import { putUser } from "./teste4.js"
 import { getAccess } from "./teste5.js"
 import checkPermissions from "./permissions.js"
-import path from "path"
 
 const __dirname = path.resolve()
 
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.static(__dirname + "/public"))
 
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
   res.send(`get user/ </br>
   get users/ </br>
   post users/ </br>
@@ -39,6 +39,6 @@ app.put("/users", [checkPermissions, putUser])
 app.get("/users/access", getAccess)
 
 const port = 3000
-app.listen(port, function () {
+app.listen(port, () => {
   console.log("Express server listening on port " + port)
 })

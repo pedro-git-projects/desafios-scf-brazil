@@ -6,8 +6,8 @@ export const getAccess = (req, res) => {
   const { name } = req.query
 
   if (accessCount[name]) {
-    res.send(`Usuário ${name} foi lido ${accessCount[name]} vezes.`)
+    res.json({ number_of_accesses: accessCount[name] })
   } else {
-    res.send(`Usuário ${name} não foi acessado.`)
+    res.json({ number_of_accesses: 0 })
   }
 }

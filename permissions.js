@@ -5,12 +5,12 @@ const checkPermissions = (req, res, next) => {
   const user = fakeData.find((user) => user.name === name)
 
   if (user) {
-    // Verifica se o usuário possui permissões de delete ou update
+    // Verifica se o usuário possui permissões delete ou update.
     if (
       user.permissions.includes("delete") ||
       user.permissions.includes("update")
     ) {
-      // Se tiver permissões, chama o próximo middleware ou a função de rota
+      // Se tiver permissões, chama a função da rota.
       next()
     } else {
       res
