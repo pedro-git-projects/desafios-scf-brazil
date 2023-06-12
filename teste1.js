@@ -19,7 +19,7 @@ export const getUser = (req, res, next) => {
     } else {
       accessCount[name] = 1
     }
-    res.send(user)
+    res.json({ user: user })
   } else {
     // Trata o caso em que o usuário não foi encontrado.
     res.status(404).json({ message: "Usuário não encontrado" })
@@ -27,5 +27,5 @@ export const getUser = (req, res, next) => {
 }
 
 export const getUsers = (req, res, next) => {
-  res.send(fakeData)
+  res.json({ users: fakeData })
 }
